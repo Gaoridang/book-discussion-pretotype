@@ -1,0 +1,108 @@
+[
+  {
+    "timestamp": "2025-08-09T03:42:00.492Z",
+    "type": "join",
+    "userId": "402492f9",
+    "alias": "reader1",
+    "room": "1984"
+  },
+  {
+    "timestamp": "2025-08-09T03:42:00.493Z",
+    "type": "bot_welcome",
+    "room": "1984"
+  },
+  {
+    "timestamp": "2025-08-09T03:42:15.388Z",
+    "type": "message",
+    "userId": "402492f9",
+    "alias": "reader1",
+    "room": "1984",
+    "messageLength": 25
+  },
+  {
+    "timestamp": "2025-08-09T03:42:15.389Z",
+    "type": "bot_response",
+    "room": "1984",
+    "trigger": "What’s the theme of 1984?"
+  },
+  {
+    "timestamp": "2025-08-09T03:42:45.526Z",
+    "type": "join",
+    "userId": "3ba1e961",
+    "alias": "reader2",
+    "room": "1984"
+  },
+  {
+    "timestamp": "2025-08-09T03:42:45.527Z",
+    "type": "bot_welcome",
+    "room": "1984"
+  },
+  {
+    "timestamp": "2025-08-09T03:42:48.477Z",
+    "type": "message",
+    "userId": "3ba1e961",
+    "alias": "reader2",
+    "room": "1984",
+    "messageLength": 2
+  },
+  {
+    "timestamp": "2025-08-09T03:42:48.478Z",
+    "type": "bot_response",
+    "room": "1984",
+    "trigger": "hi"
+  },
+  {
+    "timestamp": "2025-08-09T03:43:00.649Z",
+    "type": "message",
+    "userId": "3ba1e961",
+    "alias": "reader2",
+    "room": "1984",
+    "messageLength": 17
+  },
+  {
+    "timestamp": "2025-08-09T03:43:00.649Z",
+    "type": "bot_response",
+    "room": "1984",
+    "trigger": "what's the theme?"
+  },
+  {
+    "timestamp": "2025-08-09T03:43:14.860Z",
+    "type": "message",
+    "userId": "402492f9",
+    "alias": "reader1",
+    "room": "1984",
+    "messageLength": 14
+  },
+  {
+    "timestamp": "2025-08-09T03:43:14.860Z",
+    "type": "bot_response",
+    "room": "1984",
+    "trigger": "Hi I'm reader1"
+  },
+  {
+    "timestamp": "2025-08-09T03:44:24.778Z",
+    "type": "join",
+    "userId": "7ab80e1a",
+    "alias": "reader3",
+    "room": "to-kill-a-mockingbird"
+  },
+  {
+    "timestamp": "2025-08-09T03:44:24.779Z",
+    "type": "bot_welcome",
+    "room": "to-kill-a-mockingbird"
+  },
+  {
+    "timestamp": "2025-08-09T03:44:29.720Z",
+    "type": "message",
+    "userId": "7ab80e1a",
+    "alias": "reader3",
+    "room": "to-kill-a-mockingbird",
+    "messageLength": 8
+  },
+  {
+    "timestamp": "2025-08-09T03:44:29.721Z",
+    "type": "bot_response",
+    "room": "to-kill-a-mockingbird",
+    "trigger": "Welcome!"
+  }
+]

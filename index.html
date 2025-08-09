@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Discussion Pretotype with AI</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    #join-form { margin-bottom: 20px; }
+    #chat { display: none; border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll; }
+    #messages { list-style: none; padding: 0; }
+    #message-form { margin-top: 10px; }
+    select, input[type="text"] { width: 300px; margin-bottom: 10px; }
+  </style>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body>
+  <h1>Real-Time Book Discussion with AI Reader</h1>
+  <p>Select a book and enter an alias to join a discussion room. The AI assistant will guide with book knowledge.</p>
+  
+  <div id="join-form">
+    <input type="text" id="user-alias" placeholder="Your alias (e.g., Reader1)" required>
+    <select id="book-title">
+      <option value="">Select a Book</option>
+      <option value="1984">1984 by George Orwell</option>
+      <option value="To Kill a Mockingbird">To Kill a Mockingbird by Harper Lee</option>
+      <option value="The Great Gatsby">The Great Gatsby by F. Scott Fitzgerald</option>
+    </select>
+    <button onclick="joinRoom()">Join Discussion</button>
+  </div>
+  
+  <div id="chat">
+    <h2>Discussion for: <span id="current-book"></span></h2>
+    <ul id="messages"></ul>
+    <form id="message-form">
+      <input type="text" id="message" placeholder="Your message... (ask AI about the book!)" required>
+      <button onclick="sendMessage(event)">Send</button>
+    </form>
+  </div>
+
+  <script>
+    const socket = io();
+
+    function joinRoom() {
+      const book = document.getElementById('book-title').value;
+      const alias = document.getElementById('user-alias').value.trim();
+      if (!book || !alias) return;
+      socket.emit('join', { bookTitle: book, alias });
+      document.getElementById('current-book').textContent = book;
+      document.getElementById('join-form').style.display = 'none';
+      document.getElementById('chat').style.display = 'block';
+    }
+
+    socket.on('history', (history) => {
+      const messages = document.getElementById('messages');
+      messages.innerHTML = '';
+      history.forEach(msg => addMessage(msg));
+    });
+
+    socket.on('message', (msg) => {
+      addMessage(msg);
+    });
+
+    function addMessage(msg) {
+      const li = document.createElement('li');
+      const userLabel = msg.userId === 'AI' ? 'AI Reader' : msg.alias;
+      li.textContent = `[${userLabel}]: ${msg.message} (${msg.timestamp})`;
+      document.getElementById('messages').appendChild(li);
+      document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+    }
+
+    function sendMessage(event) {
+      event.preventDefault();
+      const msg = document.getElementById('message').value.trim();
+      if (!msg) return;
+      socket.emit('message', msg);
+      document.getElementById('message').value = '';
+    }
+  </script>
+</body>
+</html>
