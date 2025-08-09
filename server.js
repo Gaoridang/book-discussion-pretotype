@@ -43,17 +43,21 @@ const bookMap = {
 
 const rooms = {};
 
-let logs = [];
-try {
-  logs = JSON.parse(fs.readFileSync(LOG_FILE, 'utf8'));
-} catch (err) {
-  fs.writeFileSync(LOG_FILE, '[]');
-}
+// let logs = [];
+// try {
+//   logs = JSON.parse(fs.readFileSync(LOG_FILE, 'utf8'));
+// } catch (err) {
+//   fs.writeFileSync(LOG_FILE, '[]');
+// }
+
+// function logEvent(eventType, data) {
+//   const logEntry = { timestamp: new Date().toISOString(), type: eventType, ...data };
+//   logs.push(logEntry);
+//   fs.writeFileSync(LOG_FILE, JSON.stringify(logs, null, 2));
+// }
 
 function logEvent(eventType, data) {
-  const logEntry = { timestamp: new Date().toISOString(), type: eventType, ...data };
-  logs.push(logEntry);
-  fs.writeFileSync(LOG_FILE, JSON.stringify(logs, null, 2));
+  console.log({ timestamp: new Date().toISOString(), type: eventType, ...data });
 }
 
 function sendBotResponse(room, userMessage) {
