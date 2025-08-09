@@ -9,7 +9,6 @@ const server = http.createServer(app);
 const io = socketIo(server, { cors: { origin: '*' } });
 
 const PORT = process.env.PORT || 3000;
-const LOG_FILE = 'logs.json';
 
 const bookKnowledge = {
   '1984': {

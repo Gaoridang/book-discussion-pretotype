@@ -104,5 +104,21 @@
     "type": "bot_response",
     "room": "to-kill-a-mockingbird",
     "trigger": "Welcome!"
+  },
+  {
+    "timestamp": "2025-08-09T04:02:06.660Z",
+    "type": "session_end",
+    "userId": "3ba1e961",
+    "alias": "reader2",
+    "room": "1984",
+    "duration": 1161.134
+  },
+  {
+    "timestamp": "2025-08-09T04:07:56.747Z",
+    "type": "session_end",
+    "userId": "7ab80e1a",
+    "alias": "reader3",
+    "room": "to-kill-a-mockingbird",
+    "duration": 1411.969
   }
 ]

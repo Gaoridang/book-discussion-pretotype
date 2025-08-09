@@ -39,7 +39,7 @@
   </div>
 
   <script>
-    const socket = io();
+    const socket = io({ transports: ['polling'], upgrade: false });
 
     function joinRoom() {
       const book = document.getElementById('book-title').value;
