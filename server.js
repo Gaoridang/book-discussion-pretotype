@@ -1,8 +1,6 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
-const fs = require('fs');
-const crypto = require('crypto');
 
 const app = express();
 const server = http.createServer(app);
@@ -42,19 +40,6 @@ const bookMap = {
 
 const rooms = {};
 
-// let logs = [];
-// try {
-//   logs = JSON.parse(fs.readFileSync(LOG_FILE, 'utf8'));
-// } catch (err) {
-//   fs.writeFileSync(LOG_FILE, '[]');
-// }
-
-// function logEvent(eventType, data) {
-//   const logEntry = { timestamp: new Date().toISOString(), type: eventType, ...data };
-//   logs.push(logEntry);
-//   fs.writeFileSync(LOG_FILE, JSON.stringify(logs, null, 2));
-// }
-
 function logEvent(eventType, data) {
   console.log({ timestamp: new Date().toISOString(), type: eventType, ...data });
 }
@@ -84,13 +69,9 @@ function sendBotResponse(room, userMessage) {
   }
 }
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
-
 io.on('connection', (socket) => {
   const userIp = socket.handshake.address;
-  const userId = crypto.createHash('sha256').update(userIp + Date.now()).digest('hex').slice(0, 8);
+  const userId = require('crypto').createHash('sha256').update(userIp + Date.now()).digest('hex').slice(0, 8);
 
   let currentRoom = null;
   let joinTime = null;
@@ -118,11 +99,6 @@ io.on('connection', (socket) => {
       io.to(currentRoom).emit('message', entry);
       logEvent('bot_welcome', { room: currentRoom });
     }
-
-    const previousVisits = logs.filter(l => l.type === 'join' && l.alias === userAlias && l.room === currentRoom);
-    if (previousVisits.length > 1) {
-      logEvent('return_visit', { userId, alias: userAlias, room: currentRoom });
-    }
   });
 
   socket.on('message', (msg) => {
@@ -146,6 +122,10 @@ io.on('connection', (socket) => {
       logEvent('session_end', { userId, alias: userAlias, room: currentRoom, duration });
     }
   });
+});
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
 });
 
 server.listen(PORT, () => {
